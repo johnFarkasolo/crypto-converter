@@ -18,7 +18,13 @@ interface ICryptoTable {
 
 const CryptoTable = inject('currenciesStore')(
   observer(({ classes, currenciesStore }: ICryptoTable) => {
-    const items: TCoin[] = [];
+    const items: TCoin[] = currenciesStore!.getItems;
+
+    // console.log(items);
+
+    React.useEffect(() => {
+      currenciesStore?.fetchCoins();
+    }, []);
 
     return (
       <TableContainer component={Paper}>
